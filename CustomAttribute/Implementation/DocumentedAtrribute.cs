@@ -18,9 +18,14 @@ namespace DocumentationAttribute.Implementation
         {
             var assembly = Assembly.GetExecutingAssembly();
 
-            Console.WriteLine("Assembly name: " + assembly.FullName);
-
-            Console.WriteLine();
+            StringOutput.AppendLine($"Assembly name: {assembly.FullName.ToUpper()}");
+            DataObj.Add(new dataObj
+            {
+                Name = assembly.FullName,
+                Description = null,
+                Input = null,
+                Output = null
+            });
 
             Type[] types = assembly.GetTypes();
 
