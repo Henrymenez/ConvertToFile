@@ -1,5 +1,7 @@
-﻿using DocumentationAttribute.CustomAttribute;
+﻿using CustomAttribute.Data;
+using DocumentationAttribute.CustomAttribute;
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
@@ -8,6 +10,8 @@ namespace DocumentationAttribute.Implementation
     public class DocumentedAtrribute
     {
         public static StringBuilder StringOutput = new StringBuilder();
+
+        public static List<dataObj> DataObj { get; set; } = new List<dataObj>();
 
 
         public static void GetDocs()
@@ -53,7 +57,14 @@ namespace DocumentationAttribute.Implementation
 
                 if (documentattribute != null)
                 {
-                 
+
+                    DataObj.Add(new dataObj
+                    {
+                        Name = method.Name,
+                        Description = documentattribute.Description,
+                        Input = documentattribute?.Input,
+                        Output = documentattribute?.Output
+                    });
 
                     StringOutput.AppendLine($"\t Method: {method.Name} \n" +
                         $"\t Description: {documentattribute.Description} \n" +
@@ -64,7 +75,6 @@ namespace DocumentationAttribute.Implementation
 
             }
         }
-
 
         // Display properties
 
@@ -78,16 +88,22 @@ namespace DocumentationAttribute.Implementation
 
                 if (documentattribute != null)
                 {
-                 
+
 
                     StringOutput.AppendLine($"\t Property: {property.Name} \n" +
                         $"\t Description: {documentattribute.Description} \n");
+                    DataObj.Add(new dataObj
+                    {
+                        Name = property.Name,
+                        Description = documentattribute?.Description,
+                        Input = documentattribute?.Input,
+                        Output = documentattribute?.Output
+                    });
                 }
 
 
             }
         }
-
 
         //// Display constructors
         private static void DisplayConstructor(Type type)
@@ -105,6 +121,14 @@ namespace DocumentationAttribute.Implementation
                         $"\t Description: {documentattribute.Description} \n" +
                         $"\t Input: {documentattribute.Input} \n" +
                         $"\t Output: {documentattribute.Output} \n");
+
+                    DataObj.Add(new dataObj
+                    {
+                        Name = constructor.Name,
+                        Description = documentattribute.Description,
+                        Input = documentattribute?.Input,
+                        Output = documentattribute?.Output
+                    });
                 }
 
             }
@@ -116,26 +140,47 @@ namespace DocumentationAttribute.Implementation
 
             if (documentAttribute != null && type.IsClass)
             {
-              
+
 
                 StringOutput.AppendLine($"Class: {type.Name} \n" +
                     $"Description: {documentAttribute.Description}");
-        
+
+                DataObj.Add(new dataObj
+                {
+                    Name = type.Name,
+                    Description = documentAttribute.Description,
+                    Input = documentAttribute?.Input,
+                    Output = documentAttribute?.Output
+                });
             }
             else if (documentAttribute != null && type.IsEnum)
             {
 
                 StringOutput.AppendLine($"Enum: {type.Name} \n" +
                     $"Description: {documentAttribute.Description}");
-               
+
+                DataObj.Add(new dataObj
+                {
+                    Name = type.Name,
+                    Description = documentAttribute.Description,
+                    Input = documentAttribute?.Input,
+                    Output = documentAttribute?.Output
+                });
             }
             else if (documentAttribute != null && type.IsInterface)
             {
-               
+
 
                 StringOutput.AppendLine($"Interface: {type.Name} \n" +
                     $"Description: {documentAttribute.Description}");
 
+                DataObj.Add(new dataObj
+                {
+                    Name = type.Name,
+                    Description = documentAttribute.Description,
+                    Input = documentAttribute?.Input,
+                    Output = documentAttribute?.Output
+                });
             }
         }
     }
