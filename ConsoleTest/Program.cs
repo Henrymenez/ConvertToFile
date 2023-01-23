@@ -8,7 +8,8 @@ namespace ConsoleTest
         {
             /*Console.WriteLine("Hello, World!");*/
              DocumentedAtrribute.GetDocs();
-          //  ConvertToText.WriteToAndReadFromTxt("DocumentInfo.txt", DocumentedAtrribute.StringOutput.ToString());
+             //ConvertToText.WriteToAndReadFromTxt("DocumentInfo", DocumentedAtrribute.StringOutput.ToString());
+            //ConvertToJSON.WriteToJsonFormat("DocumentInfo.json", DocumentedAtrribute.DataObj);
         }
     }
 }
